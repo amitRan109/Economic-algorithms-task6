@@ -7,10 +7,10 @@ class Agent:
     def value(self, option: int) -> float:
         return self.values[option]
 
-def vcg (agents: List[Agent], num_options: List[int]) :
+def vcg (agents: List[Agent], num_options: int) :
     #find chosen choice
     options_values: List[float] = []
-    for op in num_options:
+    for op in range(num_options):
         options_values.append(0.0)
         for agent in agents:
             options_values[op] += agent.value(op)
@@ -20,7 +20,7 @@ def vcg (agents: List[Agent], num_options: List[int]) :
     #find agent's pay
     for a in agents:
         max_value_without_a: float = options_values[0] - a.value(0)
-        for op in num_options:
+        for op in range(num_options):
             value_without_a = options_values[op] - a.value(op)
             if (value_without_a > max_value_without_a):
                 max_value_without_a = value_without_a
@@ -35,9 +35,6 @@ def find_max(list: List[float]):
             max = x
     return max
 
-#example
-a = Agent([8,4,3],0) 
-b = Agent([5,8,1],1) 
-c = Agent([3,5,3],2)
-
-vcg([a,b,c],[0,1,2])
+if __name__ == "__main__" :
+    import doctest
+    doctest.testfile("test.txt",verbose=True)
